@@ -15,8 +15,21 @@ function App() {
   const appointmentLabel = email ? 'Sofort Termin vereinbaren' : 'Sofort anrufen'
   const checklistUrl = 'https://docs.google.com/document/d/1s1NBduxTO2q3xfWpkULeS_9bTyCS5Xrfl06JruGB4Ro/edit?tab=t.0'
 
+  const scrollToPrices = () => {
+    const element = document.getElementById('preise')
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      return
+    }
+    window.location.hash = '#preise'
+  }
+
   const openForm = (pkg) => {
-    setSelectedPackage(pkg ?? null)
+    if (!pkg) {
+      scrollToPrices()
+      return
+    }
+    setSelectedPackage(pkg)
     setShowForm(true)
   }
 
@@ -78,13 +91,17 @@ function App() {
 
               {/* CTA */}
               <div className="flex flex-col sm:flex-row gap-4">
-                <button
-                  onClick={() => openForm()}
-                  className="btn-primary group"
+                <a
+                  href="#preise"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    scrollToPrices()
+                  }}
+                  className="btn-primary group text-center"
                 >
                   <Clock className="inline-block w-5 h-5 mr-2" />
                   Jetzt Express-Anfrage stellen
-                </button>
+                </a>
 
                 {appointmentHref ? (
                   <a
@@ -354,7 +371,7 @@ function App() {
 
           <div className="mt-12 text-center">
             <button
-              onClick={() => openForm()}
+              onClick={() => scrollToPrices()}
               className="btn-primary text-xl"
             >
               Jetzt starten – Angebot anfordern
@@ -560,7 +577,7 @@ function App() {
 
           <div className="text-center mt-12">
             <button
-              onClick={() => openForm()}
+              onClick={() => scrollToPrices()}
               className="btn-primary text-xl"
             >
               Unverbindliches Angebot anfordern
@@ -656,12 +673,16 @@ function App() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button
-              onClick={() => openForm()}
-              className="bg-white text-primary-600 hover:bg-gray-100 font-bold px-12 py-5 rounded-lg text-xl shadow-2xl transition-all hover:scale-105"
+            <a
+              href="#preise"
+              onClick={(e) => {
+                e.preventDefault()
+                scrollToPrices()
+              }}
+              className="bg-white text-primary-600 hover:bg-gray-100 font-bold px-12 py-5 rounded-lg text-xl shadow-2xl transition-all hover:scale-105 text-center"
             >
               Express-Anfrage stellen
-            </button>
+            </a>
           </div>
 
           <p className="text-sm mt-6 opacity-90">
