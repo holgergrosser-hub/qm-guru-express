@@ -3,7 +3,14 @@ import { useForm } from 'react-hook-form'
 import { useEffect, useState } from 'react'
 
 export default function AnfrageForm({ onClose, selectedPackage }) {
-  const { register, handleSubmit, setValue, formState: { errors } } = useForm({
+  const packageOptions = {
+    'bis-5': { packageLabel: 'Bis 5 Mitarbeiter', priceEur: 2500 },
+    '6-20': { packageLabel: '6-20 Mitarbeiter', priceEur: 3500 },
+    '21-50': { packageLabel: '21-50 Mitarbeiter', priceEur: 5500 },
+    '51-100': { packageLabel: '51-100 Mitarbeiter', priceEur: 7000 }
+  }
+
+  const { register, handleSubmit, setValue, watch, formState: { errors } } = useForm({
     defaultValues: {
       employees: selectedPackage?.employeesValue || ''
     }
@@ -11,12 +18,30 @@ export default function AnfrageForm({ onClose, selectedPackage }) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [success, setSuccess] = useState(false)
 
+  const employees = watch('employees')
+  const derived = employees ? packageOptions[employees] : undefined
+
   useEffect(() => {
     if (!selectedPackage) return
     if (selectedPackage.employeesValue) setValue('employees', selectedPackage.employeesValue)
     if (selectedPackage.packageLabel) setValue('packageLabel', selectedPackage.packageLabel)
     if (selectedPackage.priceEur) setValue('priceEur', String(selectedPackage.priceEur))
   }, [selectedPackage, setValue])
+
+  useEffect(() => {
+    if (!employees) {
+      setValue('packageLabel', '')
+      setValue('priceEur', '')
+      return
+    }
+    if (!derived) {
+      setValue('packageLabel', '')
+      setValue('priceEur', '')
+      return
+    }
+    setValue('packageLabel', derived.packageLabel)
+    setValue('priceEur', String(derived.priceEur))
+  }, [employees, derived, setValue])
 
   const onSubmit = async (data) => {
     setIsSubmitting(true)
@@ -81,12 +106,14 @@ export default function AnfrageForm({ onClose, selectedPackage }) {
             <input type="hidden" {...register('packageLabel')} />
             <input type="hidden" {...register('priceEur')} />
 
-            {selectedPackage?.packageLabel ? (
+            {derived?.packageLabel || selectedPackage?.packageLabel ? (
               <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
                 <p className="font-bold text-blue-900">Ausgewähltes Paket:</p>
                 <p className="text-blue-900">
-                  {selectedPackage.packageLabel}
-                  {selectedPackage.priceEur ? ` – ${selectedPackage.priceEur}€ zzgl. MwSt.` : ''}
+                  {(derived?.packageLabel ?? selectedPackage?.packageLabel) || ''}
+                  {(derived?.priceEur ?? selectedPackage?.priceEur)
+                    ? ` – ${(derived?.priceEur ?? selectedPackage?.priceEur)}€ zzgl. MwSt.`
+                    : ''}
                 </p>
               </div>
             ) : null}
@@ -155,6 +182,11 @@ export default function AnfrageForm({ onClose, selectedPackage }) {
                   <option value="100+">Über 100 Mitarbeiter</option>
                 </select>
                 {errors.employees && <p className="text-red-500 text-sm mt-1">{errors.employees.message}</p>}
+                {derived?.priceEur ? (
+                  <p className="text-sm text-gray-600 mt-2">
+                    Preis: <strong>{derived.priceEur}€</strong> zzgl. MwSt.
+                  </p>
+                ) : null}
               </div>
 
               <div>
