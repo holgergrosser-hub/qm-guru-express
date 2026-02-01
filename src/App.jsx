@@ -474,66 +474,56 @@ function App() {
           <div className="bg-white text-gray-900 rounded-2xl p-8 max-w-4xl mx-auto">
             <h3 className="text-2xl font-bold mb-6 text-center">Im Festpreis enthalten:</h3>
 
+            <div className="bg-yellow-50 border-l-4 border-yellow-400 rounded-lg p-4 mb-6">
+              <p className="font-bold text-yellow-900 mb-2">💰 Zahlungsbedingungen:</p>
+              <ul className="list-disc pl-5 text-sm text-yellow-900 space-y-1">
+                <li><strong>Rechnung erst NACH Zertifikatserhalt</strong> – Sie zahlen nur, wenn Sie Ihr Zertifikat haben</li>
+                <li>14 Tage Zahlungsziel</li>
+              </ul>
+            </div>
+
             <div className="grid md:grid-cols-2 gap-6 mb-6">
               <div>
-                <h4 className="font-bold mb-3 text-lg">📋 Dokumentation</h4>
+                <h4 className="font-bold mb-3 text-lg">📋 Komplette QM-Dokumentation</h4>
                 <ul className="space-y-2 text-sm text-gray-700">
                   <li>✓ QM-Handbuch nach ISO 9001:2015</li>
-                  <li>✓ Verfahrensanweisungen</li>
                   <li>✓ Prozessbeschreibungen</li>
-                  <li>✓ Formulare & Checklisten</li>
+                  <li>✓ Nachweise</li>
                   <li>✓ Managementbewertung</li>
-                </ul>
-              </div>
-
-              <div>
-                <h4 className="font-bold mb-3 text-lg">🔍 Audits & Vorbereitung</h4>
-                <ul className="space-y-2 text-sm text-gray-700">
-                  <li>✓ <strong>Internes Audit</strong> (Lückenanalyse)</li>
-                  <li>✓ <strong>Vorbereitung Zertifizierungsaudit</strong></li>
-                  <li>✓ Mitarbeiter-Schulung</li>
-                  <li>✓ Audit-Simulation</li>
-                  <li>✓ Maßnahmenplan</li>
+                  <li>✓ Auditbericht</li>
                 </ul>
               </div>
 
               <div>
                 <h4 className="font-bold mb-3 text-lg">🎯 Zertifizierung</h4>
                 <ul className="space-y-2 text-sm text-gray-700">
-                  <li>✓ Zertifizierungsaudit (Online)</li>
+                  <li>✓ Online-Zertifizierungsaudit (1-2h)</li>
                   <li>✓ ISO 9001:2015 Zertifikat (PDF)</li>
-                  <li>✓ Zertifikat in Druckversion</li>
-                  <li>✓ Logo für Webseite</li>
                   <li>✓ 1 Jahr Gültigkeit</li>
                 </ul>
               </div>
 
               <div>
-                <h4 className="font-bold mb-3 text-lg">💼 Service</h4>
+                <h4 className="font-bold mb-3 text-lg">💼 Premium-Service</h4>
                 <ul className="space-y-2 text-sm text-gray-700">
                   <li>✓ Persönlicher Ansprechpartner</li>
-                  <li>✓ 100% online</li>
+                  <li>✓ 100% online, keine Anfahrt</li>
                   <li>✓ 2-3 Wochen Gesamtdauer</li>
                   <li>✓ Festpreis-Garantie</li>
-                  <li>✓ Geld-zurück bei Portal-Ablehnung*</li>
                 </ul>
               </div>
             </div>
 
-            <div className="bg-secondary-50 border-2 border-secondary-500 rounded-lg p-4 text-center">
-              <p className="font-bold text-secondary-900 mb-2">
-                🎯 NEU: Internes Audit & Vorbereitung im Preis enthalten!
-              </p>
-              <p className="text-sm text-secondary-700">
-                Bei der Konkurrenz Aufpreis. Bei QM-Guru inklusive.
+            <div className="bg-blue-50 border-2 border-blue-200 rounded-lg p-4">
+              <p className="font-bold text-blue-900 mb-2">🛡️ Unsere Garantie:</p>
+              <p className="text-sm text-blue-900">
+                Falls Ihr Zertifikat von einem Ausschreibungsportal nicht akzeptiert wird, unterstützen wir Sie kostenlos bei der Vorbereitung
+                auf die Zertifizierung durch einen akkreditierten Zertifizierer (z.B. TÜV, DEKRA).
               </p>
             </div>
           </div>
 
           <div className="text-center mt-12">
-            <p className="text-sm text-gray-400 mb-4">
-              *Falls Ihr Zertifikat vom Portal nicht akzeptiert wird (ist uns noch nie passiert)
-            </p>
             <button
               onClick={() => setShowForm(true)}
               className="btn-primary text-xl"
