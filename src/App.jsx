@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Clock, CheckCircle, AlertCircle, Phone, Mail, ArrowRight } from 'lucide-react'
+import { Clock, CheckCircle, AlertCircle, Phone, Mail } from 'lucide-react'
 import AnfrageForm from './components/AnfrageForm'
 
 function App() {

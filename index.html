@@ -15,7 +15,112 @@
       content="ISO 9001 Zertifizierung schnell, ISO Zertifikat 2 Wochen, Ausschreibung Zertifikat, QM Dokumentation erstellen"
     />
 
+    <meta name="robots" content="index,follow" />
+    <meta name="theme-color" content="#0f172a" />
+
     <link rel="canonical" href="https://express.qm-guru.de/" />
+
+    <!-- Open Graph / Twitter (Social Preview) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="de_DE" />
+    <meta property="og:url" content="https://express.qm-guru.de/" />
+    <meta property="og:site_name" content="QM-Guru" />
+    <meta property="og:title" content="ISO 9001 Zertifizierung in 2 Wochen – QM-Guru Express" />
+    <meta
+      property="og:description"
+      content="ISO 9001 Zertifikat in 2-3 Wochen – auch ohne vorhandene QM-Dokumentation. Komplett-Service inkl. QM-Handbuch, Audit-Vorbereitung & Zertifizierung. Ab 2.500€."
+    />
+    <meta property="og:image" content="https://express.qm-guru.de/og-image.svg" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="ISO 9001 Zertifizierung in 2 Wochen – QM-Guru Express" />
+    <meta
+      name="twitter:description"
+      content="Express-Zertifizierung für Ausschreibungen: QM-Doku + Vorbereitung + Zertifikat in 2-3 Wochen. Ab 2.500€."
+    />
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://qm-guru.de/#organization",
+            "name": "QM-Guru",
+            "url": "https://qm-guru.de/",
+            "contactPoint": [
+              {
+                "@type": "ContactPoint",
+                "contactType": "sales",
+                "telephone": "__PHONE_E164__",
+                "email": "__EMAIL__",
+                "availableLanguage": ["de"]
+              }
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://express.qm-guru.de/#website",
+            "url": "https://express.qm-guru.de/",
+            "name": "QM-Guru Express",
+            "publisher": { "@id": "https://qm-guru.de/#organization" },
+            "inLanguage": "de-DE"
+          },
+          {
+            "@type": "Service",
+            "@id": "https://express.qm-guru.de/#service",
+            "name": "ISO 9001 Express-Zertifizierung",
+            "serviceType": "ISO 9001 Zertifizierung (Express)",
+            "provider": { "@id": "https://qm-guru.de/#organization" },
+            "areaServed": "DE",
+            "offers": {
+              "@type": "Offer",
+              "priceCurrency": "EUR",
+              "price": "2500",
+              "url": "https://express.qm-guru.de/"
+            }
+          },
+          {
+            "@type": "FAQPage",
+            "@id": "https://express.qm-guru.de/#faq",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Ich habe NULL Dokumentation. Geht das wirklich in 2-3 Wochen?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "In vielen Fällen ist ein ISO 9001 Zertifikat in 2–3 Wochen erreichbar – abhängig von Verfügbarkeit, Scope und wie schnell Informationen/Nachweise bereitgestellt werden."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Wird das Zertifikat von Portalen wie Jagger akzeptiert?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "In der Praxis wird das Zertifikat häufig akzeptiert. Wenn ein Portal spezielle Anforderungen stellt, klären wir das gemeinsam und unterstützen bei der passenden Lösung."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Was ist im Preis enthalten?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Im Paket enthalten sind u.a. QM-Dokumentation (QM-Handbuch/Prozesse), Vorbereitung auf das Audit und die Zertifizierung. Start ab 2.500€ zzgl. MwSt., abhängig von Unternehmensgröße/Scope."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Wie kann ich sofort einen Termin vereinbaren?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Am schnellsten per E-Mail oder Telefon – wir melden uns in der Regel kurzfristig zurück."
+                }
+              }
+            ]
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

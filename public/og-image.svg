@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0f172a"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#22c55e"/>
+      <stop offset="1" stop-color="#38bdf8"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="80" y="90" width="1040" height="450" rx="36" fill="#0b1220" opacity="0.55"/>
+  <rect x="120" y="140" width="220" height="10" rx="5" fill="url(#accent)"/>
+  <text x="120" y="240" fill="#ffffff" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif" font-size="64" font-weight="800">
+    ISO 9001 in 2 Wochen
+  </text>
+  <text x="120" y="320" fill="#cbd5e1" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif" font-size="34" font-weight="600">
+    Express-Zertifizierung für Ausschreibungen
+  </text>
+  <text x="120" y="400" fill="#94a3b8" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif" font-size="26">
+    QM-Dokumentation • Audit-Vorbereitung • Zertifikat
+  </text>
+  <text x="120" y="468" fill="#e2e8f0" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif" font-size="28" font-weight="700">
+    QM-Guru Express
+  </text>
+</svg>

@@ -1,1 +1,2 @@
-/* /index.html 200
+# Intentionally left empty.
+# No SPA fallback redirect, so unknown paths return a real 404.
