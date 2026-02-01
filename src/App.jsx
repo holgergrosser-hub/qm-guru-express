@@ -4,10 +4,21 @@ import AnfrageForm from './components/AnfrageForm'
 
 function App() {
   const [showForm, setShowForm] = useState(false)
+  const [selectedPackage, setSelectedPackage] = useState(null)
   const phone = import.meta.env.VITE_PHONE
   const email = import.meta.env.VITE_EMAIL
   const phoneHref = phone ? `tel:${String(phone).replace(/[^\d+]/g, '')}` : undefined
   const emailHref = email ? `mailto:${email}` : undefined
+  const appointmentHref = email
+    ? `mailto:${email}?subject=${encodeURIComponent('Sofort Termin vereinbaren – ISO 9001 Express')}`
+    : phoneHref
+  const appointmentLabel = email ? 'Sofort Termin vereinbaren' : 'Sofort anrufen'
+  const checklistUrl = 'https://docs.google.com/document/d/1s1NBduxTO2q3xfWpkULeS_9bTyCS5Xrfl06JruGB4Ro/edit?tab=t.0'
+
+  const openForm = (pkg) => {
+    setSelectedPackage(pkg ?? null)
+    setShowForm(true)
+  }
 
   return (
     <div className="min-h-screen">
@@ -47,7 +58,7 @@ function App() {
 
               <h2 className="text-2xl text-gray-300 mb-8 font-semibold">
                 Ausschreibung läuft? Portal braucht ISO-Zertifikat?<br />
-                <span className="text-white">Wir erstellen QM-Dokumentation, führen internes Audit durch und zertifizieren Sie.</span>
+                <span className="text-white">Wir erstellen QM-Dokumentation, bereiten Sie vor und zertifizieren Sie.</span>
               </h2>
 
               {/* USPs */}
@@ -55,7 +66,7 @@ function App() {
                 {[
                   'Express-Zertifizierung auch OHNE vorhandene QM-Dokumentation',
                   'QM-Handbuch, Verfahrensanweisungen & Prozesse erstellen wir',
-                  'Internes Audit & Vorbereitung auf Zertifizierungsaudit inklusive',
+                  'Vorbereitung auf das Zertifizierungsaudit inklusive',
                   'ISO 9001 Zertifikat in 2-3 Wochen statt 6 Monaten beim TÜV'
                 ].map((usp, i) => (
                   <li key={i} className="flex items-center gap-3">
@@ -68,26 +79,26 @@ function App() {
               {/* CTA */}
               <div className="flex flex-col sm:flex-row gap-4">
                 <button
-                  onClick={() => setShowForm(true)}
+                  onClick={() => openForm()}
                   className="btn-primary group"
                 >
                   <Clock className="inline-block w-5 h-5 mr-2" />
                   Jetzt Express-Anfrage stellen
                 </button>
 
-                {phoneHref ? (
+                {appointmentHref ? (
                   <a
-                    href={phoneHref}
+                    href={appointmentHref}
                     className="bg-white hover:bg-gray-50 text-primary-600 font-semibold px-8 py-4 rounded-lg border-2 border-primary-500 transition-all duration-200 text-center"
                   >
                     <Phone className="inline-block w-5 h-5 mr-2" />
-                    Sofort anrufen
+                    {appointmentLabel}
                   </a>
                 ) : null}
               </div>
 
               <p className="text-sm text-gray-400 mt-4">
-                ⚡ Rückmeldung innerhalb 2 Stunden • Keine Abofalle
+                ⚡ Rückmeldung innerhalb 4 Stunden • Keine Abofalle
               </p>
             </div>
 
@@ -122,7 +133,7 @@ function App() {
                     <div>
                       <div className="font-bold text-blue-900">WOCHE 1-2</div>
                       <p className="text-sm text-blue-700">
-                        QM-Guru erstellt Ihre komplette Dokumentation, führt internes Audit durch
+                        QM-Guru erstellt Ihre komplette Dokumentation
                         und bereitet Sie auf das Zertifizierungsaudit vor
                       </p>
                     </div>
@@ -135,7 +146,7 @@ function App() {
                     <div>
                       <div className="font-bold text-green-900">WOCHE 3</div>
                       <p className="text-sm text-green-700">
-                        Zertifizierungsaudit (3-4h) → Zertifikat →
+                        Zertifizierungsaudit (1-2h) → Zertifikat →
                         Sie laden es im Portal hoch. GESCHAFFT! ✅
                       </p>
                     </div>
@@ -149,7 +160,7 @@ function App() {
                   Ab 2.500€
                 </div>
                 <p className="text-sm text-gray-600">
-                  All-inclusive: Dokumentation + Internes Audit + Vorbereitung + Zertifizierung
+                  All-inclusive: Dokumentation + Vorbereitung + Zertifizierung
                 </p>
               </div>
 
@@ -224,7 +235,7 @@ function App() {
               Der QM-Guru Express-Prozess: Dokumentation bis Zertifikat
             </h2>
             <p className="text-xl text-gray-600">
-              Komplettservice in 6 Schritten – Wir machen ALLES
+              Komplettservice in 5 Schritten – Wir machen ALLES
             </p>
           </div>
 
@@ -270,13 +281,13 @@ function App() {
               <div className="w-12 h-12 bg-secondary-500 text-white rounded-full flex items-center justify-center font-bold text-xl mb-4">
                 4
               </div>
-              <h3 className="font-bold text-lg mb-2">Internes Audit durchführen</h3>
+              <h3 className="font-bold text-lg mb-2">Vorbereitung Zertifizierungsaudit</h3>
               <p className="text-sm text-gray-600">
-                Wir führen ein internes Audit durch, um sicherzustellen,
-                dass Ihre Prozesse der Dokumentation entsprechen.
+                Wir klären letzte Fragen, bereiten Sie auf typische Audit-Fragen vor
+                und stimmen den Ablauf für das Online-Audit ab.
               </p>
               <div className="mt-3 text-xs text-secondary-700 font-semibold">
-                🔍 Woche 2 • NEU IM PAKET
+                🎓 Woche 2
               </div>
             </div>
 
@@ -284,53 +295,69 @@ function App() {
               <div className="w-12 h-12 bg-secondary-500 text-white rounded-full flex items-center justify-center font-bold text-xl mb-4">
                 5
               </div>
-              <h3 className="font-bold text-lg mb-2">Vorbereitung Zertifizierungsaudit</h3>
-              <p className="text-sm text-gray-600">
-                Schulung Ihrer Mitarbeiter. Simulation typischer Audit-Fragen.
-                Maßnahmenplan für Abweichungen.
-              </p>
-              <div className="mt-3 text-xs text-secondary-700 font-semibold">
-                🎓 Woche 2 • NEU IM PAKET
-              </div>
-            </div>
-
-            <div className="bg-white rounded-xl p-6 shadow-lg border-2 border-primary-500">
-              <div className="w-12 h-12 bg-primary-500 text-white rounded-full flex items-center justify-center font-bold text-xl mb-4">
-                6
-              </div>
               <h3 className="font-bold text-lg mb-2">Zertifizierungsaudit & Zertifikat</h3>
               <p className="text-sm text-gray-600">
-                3-4 Stunden Online-Audit. ISO 9001:2015 Zertifikat (PDF + Druck).
-                Sofort ins Portal hochladen! ✅
+                Online-Zertifizierungsaudit (1-2h) → ISO 9001:2015 Zertifikat (PDF)
+                → sofort im Portal hochladen! ✅
               </p>
-              <div className="mt-3 text-xs text-gray-500">🎯 Woche 2-3</div>
+              <div className="mt-3 text-xs text-secondary-700 font-semibold">
+                🎯 Woche 2-3
+              </div>
             </div>
 
           </div>
 
-          <div className="mt-12 bg-blue-50 border-2 border-blue-200 rounded-xl p-6 max-w-3xl mx-auto">
-            <h3 className="font-bold text-lg mb-3 flex items-center gap-2">
-              <CheckCircle className="w-6 h-6 text-blue-600" />
-              NEU: Internes Audit & Vorbereitung inklusive!
+          <div className="mt-12 bg-blue-50 border-2 border-blue-200 rounded-xl p-8 max-w-3xl mx-auto">
+            <h3 className="font-bold text-xl mb-2 flex items-center justify-center gap-2">
+              <span className="text-2xl">📋</span>
+              Wichtig: Ihre Unterlagen-Checkliste
             </h3>
-            <p className="text-gray-700 mb-3">
-              Anders als bei der Konkurrenz ist bei QM-Guru das <strong>interne Audit</strong> und
-              die <strong>Vorbereitung auf das Zertifizierungsaudit</strong> bereits im Preis enthalten.
+            <p className="text-gray-700 text-center">
+              Nach Auftragsbestätigung benötigen wir einige Informationen von Ihnen. Bereiten Sie diese schon jetzt vor:
             </p>
-            <ul className="space-y-2 text-sm text-gray-600">
-              <li>✓ Internes Audit identifiziert Lücken BEVOR der Zertifizierer kommt</li>
-              <li>✓ Mitarbeiter-Schulung: Wie verhalte ich mich im Audit?</li>
-              <li>✓ Maßnahmenplan für gefundene Abweichungen</li>
-              <li>✓ Simulation typischer Audit-Fragen</li>
-            </ul>
+            <div className="mt-5 flex justify-center">
+              <a
+                href={checklistUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 py-4 rounded-lg shadow-lg transition-all"
+              >
+                Zur Unterlagen-Checkliste
+              </a>
+            </div>
+            <p className="mt-4 text-center text-sm text-gray-600">
+              → Die Checkliste erklärt detailliert, welche Informationen wir benötigen
+            </p>
+          </div>
+
+          <div className="mt-10 max-w-3xl mx-auto">
+            <h3 className="text-xl font-bold mb-4">So geht es jetzt weiter:</h3>
+            <div className="space-y-3 text-gray-700">
+              <div>
+                <div className="font-bold">Innerhalb 4 Stunden: WhatsApp-Kontakt</div>
+                <div className="text-sm">Wir klären letzte Fragen und bestätigen den Auftrag.</div>
+              </div>
+              <div>
+                <div className="font-bold">Nach Auftragsbestätigung: Unterlagen senden</div>
+                <div className="text-sm">Sie schicken uns die Infos aus der Checkliste per E-Mail.</div>
+              </div>
+              <div>
+                <div className="font-bold">Woche 1-2: Dokumentation erstellen</div>
+                <div className="text-sm">Wir erstellen Ihr komplettes QM-System.</div>
+              </div>
+              <div>
+                <div className="font-bold">Woche 2-3: Zertifizierung</div>
+                <div className="text-sm">Online-Audit (1-2h) → ISO 9001 Zertifikat → Portal-Upload.</div>
+              </div>
+            </div>
           </div>
 
           <div className="mt-12 text-center">
             <button
-              onClick={() => setShowForm(true)}
+              onClick={() => openForm()}
               className="btn-primary text-xl"
             >
-              Jetzt starten – mit internem Audit & Vorbereitung!
+              Jetzt starten – Angebot anfordern
             </button>
           </div>
         </div>
@@ -364,7 +391,7 @@ function App() {
               <div>
                 <p className="text-lg italic mb-4">
                   "Ausschreibung lief, ich hatte 3 Wochen Zeit. QM-Guru hat meine komplette
-                  Dokumentation erstellt, internes Audit durchgeführt und mich zertifiziert.
+                  Dokumentation erstellt, mich vorbereitet und zertifiziert.
                   In 2,5 Wochen war ich portal-fähig. Auftrag im 6-stelligen Bereich gesichert."
                 </p>
                 <p className="font-bold">— Geschäftsführer, Technische Beratung, 15 Mitarbeiter</p>
@@ -383,7 +410,7 @@ function App() {
               Transparente ISO 9001 Festpreise
             </h2>
             <p className="text-xl text-gray-300">
-              All-inclusive: Dokumentation + Internes Audit + Vorbereitung + Zertifizierung
+              All-inclusive: Dokumentation + Vorbereitung + Zertifizierung
             </p>
           </div>
 
@@ -398,12 +425,14 @@ function App() {
               </div>
               <ul className="space-y-2 text-sm mb-6">
                 <li>✓ QM-Dokumentation</li>
-                <li>✓ Internes Audit</li>
                 <li>✓ Audit-Vorbereitung</li>
-                <li>✓ Zertifizierungsaudit</li>
+                <li>✓ Zertifizierungsaudit (1-2h)</li>
                 <li>✓ ISO 9001 Zertifikat</li>
               </ul>
-              <button onClick={() => setShowForm(true)} className="w-full btn-primary text-sm py-3">
+              <button
+                onClick={() => openForm({ employeesValue: 'bis-5', packageLabel: 'Bis 5 Mitarbeiter', priceEur: 2500 })}
+                className="w-full btn-primary text-sm py-3"
+              >
                 Jetzt anfragen
               </button>
             </div>
@@ -420,12 +449,14 @@ function App() {
               </div>
               <ul className="space-y-2 text-sm mb-6">
                 <li>✓ QM-Dokumentation</li>
-                <li>✓ Internes Audit</li>
                 <li>✓ Audit-Vorbereitung</li>
-                <li>✓ Zertifizierungsaudit</li>
+                <li>✓ Zertifizierungsaudit (1-2h)</li>
                 <li>✓ ISO 9001 Zertifikat</li>
               </ul>
-              <button onClick={() => setShowForm(true)} className="w-full btn-primary text-sm py-3">
+              <button
+                onClick={() => openForm({ employeesValue: '6-20', packageLabel: '6-20 Mitarbeiter', priceEur: 3500 })}
+                className="w-full btn-primary text-sm py-3"
+              >
                 Jetzt anfragen
               </button>
             </div>
@@ -439,12 +470,14 @@ function App() {
               </div>
               <ul className="space-y-2 text-sm mb-6">
                 <li>✓ QM-Dokumentation</li>
-                <li>✓ Internes Audit</li>
                 <li>✓ Audit-Vorbereitung</li>
-                <li>✓ Zertifizierungsaudit</li>
+                <li>✓ Zertifizierungsaudit (1-2h)</li>
                 <li>✓ ISO 9001 Zertifikat</li>
               </ul>
-              <button onClick={() => setShowForm(true)} className="w-full btn-primary text-sm py-3">
+              <button
+                onClick={() => openForm({ employeesValue: '21-50', packageLabel: '21-50 Mitarbeiter', priceEur: 5500 })}
+                className="w-full btn-primary text-sm py-3"
+              >
                 Jetzt anfragen
               </button>
             </div>
@@ -458,12 +491,14 @@ function App() {
               </div>
               <ul className="space-y-2 text-sm mb-6">
                 <li>✓ QM-Dokumentation</li>
-                <li>✓ Internes Audit</li>
                 <li>✓ Audit-Vorbereitung</li>
-                <li>✓ Zertifizierungsaudit</li>
+                <li>✓ Zertifizierungsaudit (1-2h)</li>
                 <li>✓ ISO 9001 Zertifikat</li>
               </ul>
-              <button onClick={() => setShowForm(true)} className="w-full btn-primary text-sm py-3">
+              <button
+                onClick={() => openForm({ employeesValue: '51-100', packageLabel: '51-100 Mitarbeiter', priceEur: 7000 })}
+                className="w-full btn-primary text-sm py-3"
+              >
                 Jetzt anfragen
               </button>
             </div>
@@ -517,15 +552,15 @@ function App() {
             <div className="bg-blue-50 border-2 border-blue-200 rounded-lg p-4">
               <p className="font-bold text-blue-900 mb-2">🛡️ Unsere Garantie:</p>
               <p className="text-sm text-blue-900">
-                Falls Ihr Zertifikat von einem Ausschreibungsportal nicht akzeptiert wird, unterstützen wir Sie kostenlos bei der Vorbereitung
-                auf die Zertifizierung durch einen akkreditierten Zertifizierer (z.B. TÜV, DEKRA).
+                Wenn Sie die Ausschreibung nicht bekommen oder ein Portal eine akkreditierte Zertifizierung verlangt,
+                unterstützen wir Sie kostenlos dabei, die akkreditierte Zertifizierung zu erhalten. Die erstellten Dokumente sind dafür eine sehr gute Grundlage.
               </p>
             </div>
           </div>
 
           <div className="text-center mt-12">
             <button
-              onClick={() => setShowForm(true)}
+              onClick={() => openForm()}
               className="btn-primary text-xl"
             >
               Unverbindliches Angebot anfordern
@@ -559,9 +594,9 @@ function App() {
                 Wird das Zertifikat von Portalen wie Jagger akzeptiert?
               </summary>
               <p className="mt-4 text-gray-600">
-                Ja, zu 98%. Wir sind eine anerkannte Zertifizierungsstelle.
-                ISO 9001 verlangt KEINE Akkreditierung. Selbst Toyota akzeptiert unsere Zertifikate.
-                Bei Portal-Ablehnung: Geld zurück.
+                In der Praxis werden ISO 9001 Zertifikate von den meisten Portalen akzeptiert.
+                Falls ein Portal explizit eine <strong>akkreditierte</strong> Zertifizierung verlangt, unterstützen wir Sie kostenlos dabei,
+                die akkreditierte Zertifizierung zu erhalten – die erstellten Dokumente sind dafür eine sehr gute Grundlage.
               </p>
             </details>
 
@@ -570,19 +605,19 @@ function App() {
                 Was ist im Preis enthalten?
               </summary>
               <p className="mt-4 text-gray-600">
-                ALLES: QM-Dokumentation erstellen, internes Audit, Vorbereitung auf Zertifizierungsaudit,
-                Online-Zertifizierungsaudit, ISO 9001:2015 Zertifikat (PDF + Druck), Logo für Webseite.
+                QM-Dokumentation (QM-Handbuch, Prozessbeschreibungen, Nachweise, Managementbewertung, Auditbericht),
+                Vorbereitung auf das Online-Zertifizierungsaudit sowie das Zertifizierungsaudit (1-2h) inkl. ISO 9001:2015 Zertifikat (PDF).
                 Festpreis, keine versteckten Kosten.
               </p>
             </details>
 
             <details className="bg-white rounded-xl p-6 shadow-lg">
               <summary className="font-bold text-lg cursor-pointer">
-                Was bedeutet "internes Audit inklusive"?
+                Wie kann ich sofort einen Termin vereinbaren?
               </summary>
               <p className="mt-4 text-gray-600">
-                Anders als die Konkurrenz führen wir ein internes Audit durch BEVOR das Zertifizierungsaudit stattfindet.
-                So identifizieren wir Lücken frühzeitig und Sie gehen mit 100% Sicherheit ins Zertifizierungsaudit.
+                Nutzen Sie den Button <strong>„Sofort Termin vereinbaren“</strong> oben – oder schreiben Sie uns direkt per E-Mail.
+                Wir melden uns in der Regel innerhalb von 4 Stunden (Mo–Fr).
               </p>
             </details>
 
@@ -591,18 +626,18 @@ function App() {
                 Wie läuft das Online-Audit ab?
               </summary>
               <p className="mt-4 text-gray-600">
-                Per Video-Call (Zoom/Teams), 3-4 Stunden. Sie zeigen uns Ihre Prozesse am Bildschirm,
-                wir stellen Fragen. Kein Vor-Ort-Termin nötig. Pragmatisch, nicht bürokratisch.
+                Per Video-Call (Zoom/Teams), typischerweise 1-2 Stunden.
+                Sie zeigen uns Ihre Prozesse am Bildschirm, wir stellen Fragen.
+                Kein Vor-Ort-Termin nötig. Pragmatisch, nicht bürokratisch.
               </p>
             </details>
 
             <details className="bg-white rounded-xl p-6 shadow-lg">
               <summary className="font-bold text-lg cursor-pointer">
-                Was kostet die Rezertifizierung im nächsten Jahr?
+                Welche Unterlagen braucht ihr für die Dokumentation?
               </summary>
               <p className="mt-4 text-gray-600">
-                Ab 1.290€. Viel weniger, weil die Dokumentation bereits existiert.
-                Nur noch Update + kurzes Audit.
+                Dafür gibt es eine Unterlagen-Checkliste. Sie können sie direkt herunterladen und schon vorab alles vorbereiten.
               </p>
             </details>
 
@@ -622,25 +657,15 @@ function App() {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
-              onClick={() => setShowForm(true)}
+              onClick={() => openForm()}
               className="bg-white text-primary-600 hover:bg-gray-100 font-bold px-12 py-5 rounded-lg text-xl shadow-2xl transition-all hover:scale-105"
             >
               Express-Anfrage stellen
             </button>
-
-            {phoneHref ? (
-              <a
-                href={phoneHref}
-                className="bg-primary-700 hover:bg-primary-800 font-bold px-12 py-5 rounded-lg text-xl border-2 border-white transition-all hover:scale-105"
-              >
-                <Phone className="inline-block w-6 h-6 mr-2" />
-                Sofort anrufen
-              </a>
-            ) : null}
           </div>
 
           <p className="text-sm mt-6 opacity-90">
-            ⚡ Rückmeldung innerhalb 2 Stunden • Mo-Fr 8-20 Uhr • Sa 9-16 Uhr
+            ⚡ Rückmeldung innerhalb 4 Stunden • Mo-Fr 8-20 Uhr • Sa 9-16 Uhr
           </p>
         </div>
       </section>
@@ -697,7 +722,12 @@ function App() {
       </footer>
 
       {/* Formular Modal */}
-      {showForm && <AnfrageForm onClose={() => setShowForm(false)} />}
+      {showForm && (
+        <AnfrageForm
+          onClose={() => setShowForm(false)}
+          selectedPackage={selectedPackage}
+        />
+      )}
 
     </div>
   )

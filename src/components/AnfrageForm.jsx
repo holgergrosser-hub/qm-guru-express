@@ -1,11 +1,22 @@
 import { X, CheckCircle, Clock } from 'lucide-react'
 import { useForm } from 'react-hook-form'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
-export default function AnfrageForm({ onClose }) {
-  const { register, handleSubmit, formState: { errors } } = useForm()
+export default function AnfrageForm({ onClose, selectedPackage }) {
+  const { register, handleSubmit, setValue, formState: { errors } } = useForm({
+    defaultValues: {
+      employees: selectedPackage?.employeesValue || ''
+    }
+  })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [success, setSuccess] = useState(false)
+
+  useEffect(() => {
+    if (!selectedPackage) return
+    if (selectedPackage.employeesValue) setValue('employees', selectedPackage.employeesValue)
+    if (selectedPackage.packageLabel) setValue('packageLabel', selectedPackage.packageLabel)
+    if (selectedPackage.priceEur) setValue('priceEur', String(selectedPackage.priceEur))
+  }, [selectedPackage, setValue])
 
   const onSubmit = async (data) => {
     setIsSubmitting(true)
@@ -19,6 +30,8 @@ export default function AnfrageForm({ onClose }) {
       formData.append('employees', data.employees)
       formData.append('deadline', data.deadline)
       formData.append('message', data.message)
+      if (data.packageLabel) formData.append('packageLabel', data.packageLabel)
+      if (data.priceEur) formData.append('priceEur', data.priceEur)
       formData.append('source', 'QM-Guru Express Landing')
 
       await fetch(import.meta.env.VITE_FORM_ENDPOINT, {
@@ -45,7 +58,7 @@ export default function AnfrageForm({ onClose }) {
         <div className="bg-primary-500 text-white px-8 py-6 rounded-t-2xl flex items-center justify-between">
           <div>
             <h2 className="text-2xl font-bold">Express-Anfrage</h2>
-            <p className="text-primary-100 text-sm mt-1">⚡ Rückmeldung innerhalb 2 Stunden</p>
+            <p className="text-primary-100 text-sm mt-1">⚡ Rückmeldung innerhalb 4 Stunden</p>
           </div>
           <button onClick={onClose} className="p-2 hover:bg-primary-600 rounded-lg">
             <X className="w-6 h-6" />
@@ -59,11 +72,24 @@ export default function AnfrageForm({ onClose }) {
             </div>
             <h3 className="text-3xl font-bold text-gray-900 mb-3">Anfrage erhalten!</h3>
             <p className="text-xl text-gray-600">
-              Wir melden uns innerhalb von 2 Stunden bei Ihnen.
+              Wir melden uns innerhalb von 4 Stunden bei Ihnen.
             </p>
           </div>
         ) : (
           <form onSubmit={handleSubmit(onSubmit)} className="px-8 py-6 space-y-6">
+
+            <input type="hidden" {...register('packageLabel')} />
+            <input type="hidden" {...register('priceEur')} />
+
+            {selectedPackage?.packageLabel ? (
+              <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
+                <p className="font-bold text-blue-900">Ausgewähltes Paket:</p>
+                <p className="text-blue-900">
+                  {selectedPackage.packageLabel}
+                  {selectedPackage.priceEur ? ` – ${selectedPackage.priceEur}€ zzgl. MwSt.` : ''}
+                </p>
+              </div>
+            ) : null}
 
             <div className="grid md:grid-cols-2 gap-6">
               <div>
