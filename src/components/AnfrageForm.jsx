@@ -47,21 +47,27 @@ export default function AnfrageForm({ onClose, selectedPackage }) {
     setIsSubmitting(true)
 
     try {
-      const formData = new FormData()
-      formData.append('name', data.name)
-      formData.append('email', data.email)
-      formData.append('phone', data.phone)
-      formData.append('company', data.company)
-      formData.append('employees', data.employees)
-      formData.append('deadline', data.deadline)
-      formData.append('message', data.message)
-      if (data.packageLabel) formData.append('packageLabel', data.packageLabel)
-      if (data.priceEur) formData.append('priceEur', data.priceEur)
-      formData.append('source', 'QM-Guru Express Landing')
+      const endpoint = import.meta.env.VITE_FORM_ENDPOINT
+      if (!endpoint || endpoint.includes('YOUR_SCRIPT_ID')) {
+        alert('Formular ist noch nicht konfiguriert (VITE_FORM_ENDPOINT fehlt).')
+        return
+      }
 
-      await fetch(import.meta.env.VITE_FORM_ENDPOINT, {
+      const payload = new URLSearchParams()
+      payload.set('name', data.name)
+      payload.set('email', data.email)
+      payload.set('phone', data.phone)
+      payload.set('company', data.company)
+      payload.set('employees', data.employees)
+      payload.set('deadline', data.deadline)
+      payload.set('message', data.message || '')
+      if (data.packageLabel) payload.set('packageLabel', data.packageLabel)
+      if (data.priceEur) payload.set('priceEur', data.priceEur)
+      payload.set('source', 'QM-Guru Express Landing')
+
+      await fetch(endpoint, {
         method: 'POST',
-        body: formData,
+        body: payload,
         mode: 'no-cors'
       })
 
