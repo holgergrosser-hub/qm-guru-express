@@ -4,6 +4,10 @@ import AnfrageForm from './components/AnfrageForm'
 
 function App() {
   const [showForm, setShowForm] = useState(false)
+  const phone = import.meta.env.VITE_PHONE
+  const email = import.meta.env.VITE_EMAIL
+  const phoneHref = phone ? `tel:${String(phone).replace(/[^\d+]/g, '')}` : undefined
+  const emailHref = email ? `mailto:${email}` : undefined
 
   return (
     <div className="min-h-screen">
@@ -71,13 +75,15 @@ function App() {
                   Jetzt Express-Anfrage stellen
                 </button>
 
-                <a
-                  href={`tel:${import.meta.env.VITE_PHONE}`}
-                  className="bg-white hover:bg-gray-50 text-primary-600 font-semibold px-8 py-4 rounded-lg border-2 border-primary-500 transition-all duration-200 text-center"
-                >
-                  <Phone className="inline-block w-5 h-5 mr-2" />
-                  Sofort anrufen
-                </a>
+                {phoneHref ? (
+                  <a
+                    href={phoneHref}
+                    className="bg-white hover:bg-gray-50 text-primary-600 font-semibold px-8 py-4 rounded-lg border-2 border-primary-500 transition-all duration-200 text-center"
+                  >
+                    <Phone className="inline-block w-5 h-5 mr-2" />
+                    Sofort anrufen
+                  </a>
+                ) : null}
               </div>
 
               <p className="text-sm text-gray-400 mt-4">
@@ -632,13 +638,15 @@ function App() {
               Express-Anfrage stellen
             </button>
 
-            <a
-              href={`tel:${import.meta.env.VITE_PHONE}`}
-              className="bg-primary-700 hover:bg-primary-800 font-bold px-12 py-5 rounded-lg text-xl border-2 border-white transition-all hover:scale-105"
-            >
-              <Phone className="inline-block w-6 h-6 mr-2" />
-              Sofort anrufen
-            </a>
+            {phoneHref ? (
+              <a
+                href={phoneHref}
+                className="bg-primary-700 hover:bg-primary-800 font-bold px-12 py-5 rounded-lg text-xl border-2 border-white transition-all hover:scale-105"
+              >
+                <Phone className="inline-block w-6 h-6 mr-2" />
+                Sofort anrufen
+              </a>
+            ) : null}
           </div>
 
           <p className="text-sm mt-6 opacity-90">
@@ -663,18 +671,22 @@ function App() {
 
             <div>
               <h3 className="text-white font-bold mb-4">Kontakt</h3>
-              <p className="text-sm">
-                <Phone className="inline w-4 h-4 mr-2" />
-                <a href={`tel:${import.meta.env.VITE_PHONE}`} className="hover:text-white">
-                  {import.meta.env.VITE_PHONE}
-                </a>
-              </p>
-              <p className="text-sm mt-2">
-                <Mail className="inline w-4 h-4 mr-2" />
-                <a href={`mailto:${import.meta.env.VITE_EMAIL}`} className="hover:text-white">
-                  {import.meta.env.VITE_EMAIL}
-                </a>
-              </p>
+              {phoneHref ? (
+                <p className="text-sm">
+                  <Phone className="inline w-4 h-4 mr-2" />
+                  <a href={phoneHref} className="hover:text-white">
+                    {phone}
+                  </a>
+                </p>
+              ) : null}
+              {emailHref ? (
+                <p className="text-sm mt-2">
+                  <Mail className="inline w-4 h-4 mr-2" />
+                  <a href={emailHref} className="hover:text-white">
+                    {email}
+                  </a>
+                </p>
+              ) : null}
             </div>
 
             <div>
