@@ -1,2 +1,3 @@
 # Alte Netlify-Seite auf neue Domain umleiten
 https://qm-guru-express.netlify.app/* https://express.qm-guru.de/:splat 301!
+https://iso-express-zertifikat-qm-guru.netlify.app/* https://express.qm-guru.de/:splat 301!
