@@ -222,9 +222,9 @@ function App() {
               <div className="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-4xl">🚫</span>
               </div>
-              <h3 className="text-xl font-bold mb-3">TÜV zu langsam</h3>
+              <h3 className="text-xl font-bold mb-3">Akkreditierte Zertifizierer  zu langsam</h3>
               <p className="text-gray-600">
-                Der TÜV braucht 3-6 Monate. Bis dahin ist die Ausschreibung längst vergeben.
+                Der der akkreditierte Zertifizierer braucht 3-6 Monate. Bis dahin ist die Ausschreibung längst vergeben.
               </p>
             </div>
 
@@ -236,7 +236,7 @@ function App() {
                 ❌ Ohne Zertifikat = Keine Teilnahme
               </p>
               <p className="text-red-700">
-                Portale wie Jagger, Ariba & Co. filtern automatisch aus.
+                Kundenportale filtern automatisch aus.
                 Ihre Qualität zählt nicht – nur das hochgeladene Zertifikat.
               </p>
             </div>
