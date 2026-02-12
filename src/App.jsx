@@ -80,7 +80,7 @@ function App() {
                   'Express-Zertifizierung auch OHNE vorhandene QM-Dokumentation',
                   'QM-Handbuch, Verfahrensanweisungen & Prozesse erstellen wir',
                   'Vorbereitung auf das Zertifizierungsaudit inklusive',
-                  'ISO 9001 Zertifikat in 2-3 Wochen statt 6 Monaten beim TÜV'
+                  'ISO 9001 Zertifikat in 2-3 Wochen statt 6 Monaten beim akkreditierten Zertifizierer'
                 ].map((usp, i) => (
                   <li key={i} className="flex items-center gap-3">
                     <CheckCircle className="w-6 h-6 text-secondary-500 flex-shrink-0" />
